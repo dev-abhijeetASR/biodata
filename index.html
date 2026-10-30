@@ -92,15 +92,18 @@
   .hero::after{bottom:-90px;right:-90px;animation-direction:reverse}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  .photo-ring{position:relative;width:200px;height:200px;margin:0 auto}
-  .photo-ring svg{position:absolute;inset:0;width:100%;height:100%;
-    filter:drop-shadow(0 0 6px rgba(255,200,100,.35));animation:ringglow 4s ease-in-out infinite}
-  @keyframes ringglow{50%{filter:drop-shadow(0 0 14px rgba(255,200,100,.75))}}
-  .photo{position:absolute;inset:26px;border-radius:50%;overflow:hidden;
-    border:4px solid var(--gold-l);box-shadow:0 0 0 3px rgba(255,255,255,.25),0 10px 30px rgba(0,0,0,.35),0 0 24px rgba(255,200,100,.35);
-    animation:photoglow 4s ease-in-out infinite}
-  @keyframes photoglow{50%{box-shadow:0 0 0 3px rgba(255,255,255,.35),0 10px 30px rgba(0,0,0,.35),0 0 40px rgba(255,200,100,.7)}}
-  .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
+  /* Portrait in an arch, with Surya rays behind it (Raghukul = Suryavansh) */
+  .portrait{position:relative;width:230px;margin:0 auto}
+  .rays{position:absolute;left:50%;top:115px;width:440px;height:440px;transform:translate(-50%,-50%);pointer-events:none}
+  .arch{position:relative;aspect-ratio:4/5;border-radius:115px 115px 20px 20px;overflow:hidden;
+    border:4px solid var(--gold-l);
+    box-shadow:0 0 0 3px rgba(255,255,255,.35),0 0 0 10px rgba(243,211,138,.22),0 0 44px rgba(255,200,100,.75),0 18px 36px rgba(0,0,0,.4)}
+  .arch img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+
+  .vansh{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:4px 18px 4px 6px;border-radius:999px;
+    font-family:"Tiro Devanagari Sanskrit",serif;font-size:1.2rem;line-height:1.4;color:var(--maroon-d);
+    background:linear-gradient(180deg,#fff0bf,#f3c25a);box-shadow:0 0 0 1px rgba(255,255,255,.5),0 6px 16px -6px rgba(0,0,0,.45)}
+  .vansh svg{width:28px;height:28px;flex:none}
 
   .script{font-family:"Great Vibes",cursive;font-size:1.9rem;color:var(--gold-l);margin-top:14px;line-height:1}
   .name{font-family:"Playfair Display",serif;font-weight:700;font-size:clamp(2.1rem,7vw,3.2rem);line-height:1.15;
@@ -207,8 +210,8 @@
     .grid .item{padding:10px 12px}
     .item .v{font-size:.93rem}
     .card{padding:22px 16px 18px}
-    .photo-ring{width:176px;height:176px}
-    .photo{inset:22px}
+    .portrait{width:210px}
+    .rays{top:105px}
     .actions button{padding:10px 14px}
   }
   @media (max-width:380px){ .family{grid-template-columns:1fr} }
@@ -226,7 +229,7 @@
     .wrap{padding:0;max-width:none}
     .reveal{opacity:1!important;transform:none!important}
     .hero,.card{break-inside:avoid;box-shadow:none}
-    .hero,.head .ico,.cbtn .ci,.fam .av,.lang,.om{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .hero,.head .ico,.cbtn .ci,.fam .av,.lang,.om,.vansh{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .card{margin-top:12px}
     *{animation:none!important}
   }
@@ -243,21 +246,25 @@
 
   <!-- Hero -->
   <header class="hero reveal">
-    <div class="photo-ring">
-      <svg viewBox="-100 -100 200 200" aria-hidden="true">
+    <div class="portrait">
+      <svg class="rays" viewBox="-100 -100 200 200" aria-hidden="true">
         <defs>
-          <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#ffe6a3"/><stop offset="1" stop-color="#e0a33a"/>
-          </linearGradient>
-          <path id="pt" d="M0-74 C7-82 7-90 0-99 C-7-90-7-82 0-74Z"/>
+          <radialGradient id="rg" r=".5">
+            <stop offset=".3" stop-color="#ffe6a3" stop-opacity=".95"/>
+            <stop offset="1" stop-color="#ffd27a" stop-opacity="0"/>
+          </radialGradient>
         </defs>
-        <circle r="76" fill="none" stroke="url(#gg)" stroke-width="1.5" stroke-dasharray="2 5"/>
-        <g fill="url(#gg)" id="ring"></g>
+        <circle r="62" fill="#ffd27a" opacity=".18"/>
+        <g fill="url(#rg)" id="rays"></g>
       </svg>
-      <div class="photo"><img src="assets/photo.jpg" alt="Photo of Abhijeet B Singh"></div>
+      <div class="arch"><img src="assets/photo.jpg" alt="Photo of Abhijeet B Singh"></div>
     </div>
     <p class="script">Biodata</p>
     <h1 class="name">Abhijeet B Singh</h1>
+    <div class="vansh">
+      <svg viewBox="-16 -16 32 32" aria-hidden="true"><g fill="#d9480f"><circle r="6.5"/><g id="sr"><path d="M0-15 2-9h-4z"/></g><use href="#sr" transform="rotate(45)"/><use href="#sr" transform="rotate(90)"/><use href="#sr" transform="rotate(135)"/><use href="#sr" transform="rotate(180)"/><use href="#sr" transform="rotate(225)"/><use href="#sr" transform="rotate(270)"/><use href="#sr" transform="rotate(315)"/></g><circle r="3" fill="#ffd27a"/></svg>
+      रघुवंशी
+    </div>
     <p class="tag">Computer Engineer · Infosys · Mumbai</p>
     <div class="chips">
       <span class="chip"><b id="age">28</b> years</span>
@@ -367,7 +374,7 @@
     </div>
   </section>
 
-  <p class="foot">॥ शुभम् भवतु ॥<small>Thank you for taking the time to know me.</small></p>
+  <p class="foot">रघुकुल रीति सदा चलि आई।<br>प्रान जाहुँ बरु बचनु न जाई॥<small>Thank you for taking the time to know me.</small></p>
 </main>
 
 <div class="actions">
@@ -384,14 +391,14 @@
     document.getElementById('age').textContent=a; document.getElementById('age2').textContent=a;
   })();
 
-  // Petal ring around the photo
+  // Surya rays behind the portrait
   (function(){
-    var g=document.getElementById('ring'), ns='http://www.w3.org/2000/svg';
-    for(var i=0;i<24;i++){
-      var u=document.createElementNS(ns,'use');
-      u.setAttribute('href','#pt'); u.setAttribute('transform','rotate('+(i*15)+')');
-      u.setAttribute('opacity', i%2 ? .55 : 1);
-      g.appendChild(u);
+    var g=document.getElementById('rays'), ns='http://www.w3.org/2000/svg';
+    for(var i=0;i<32;i++){
+      var p=document.createElementNS(ns,'path'), len=i%2?78:98;
+      p.setAttribute('d','M0-'+len+' 3.2-40h-6.4z');
+      p.setAttribute('transform','rotate('+(i*360/32)+')');
+      g.appendChild(p);
     }
   })();
 
